@@ -1,0 +1,27 @@
+---
+shared:
+  files:
+    - local.yaml
+  folders:
+    - var/log
+    - var/twig
+writables:
+  after:
+   - /usr/bin/php vendor/bin/phinx migrate
+  paths:
+    - var/log
+    - var/twig
+clear_paths:
+  paths:
+    - .gitignore
+    - composer.json
+    - composer.lock
+    - deploy.yaml
+    - gulpfile.js
+    - local.yaml.dist
+    - package-lock.json
+    - package.json
+    - README.md
+    - resources/js
+    - resources/sass
+    - resources/tasks

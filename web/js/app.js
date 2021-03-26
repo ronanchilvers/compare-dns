@@ -1,0 +1,1 @@
+$(function(){$("#upload-form input[type=file]").change(function(){var i=$(this).prop("files");i[0]&&$(this).siblings(".file-name").text(i[0].name)})});

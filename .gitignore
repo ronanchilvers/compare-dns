@@ -1,0 +1,7 @@
+*.sq3
+*.sublime-*
+.php-version
+/build/
+/node_modules/
+/vendor/
+local.yaml

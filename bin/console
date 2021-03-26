@@ -1,0 +1,26 @@
+<?php
+// -*- mode: php -*-
+/**
+ * Console runner
+ *
+ * @author Ronan Chilvers <ronan@d3r.com>
+ */
+
+use App\Console\Application;
+use Ronanchilvers\Container\Container;
+
+require(__DIR__ . "/../vendor/autoload.php");
+
+$container = new Container([
+    'settings' => include(__DIR__ . '/../config/settings.php')
+]);
+
+// Load app services
+include(__DIR__ . "/../config/services.php");
+
+$console = new Application();
+$console->setContainer($container);
+
+// Load console commands
+include(__DIR__ . "/../config/console.php");
+$console->run();

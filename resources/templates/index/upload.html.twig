@@ -1,0 +1,63 @@
+{% extends 'page.html.twig' %}
+
+{% set max_length = 50 %}
+{% set records = zone.resourceRecords %}
+
+{% block body %}
+
+{{ include('partials/form.html.twig') }}
+
+<section class="section">
+    <div class="container">
+    {% if 0 == records|length %}
+        <div class="notification is-warning">No records found</div>
+    {% else  %}
+
+        <div class="table-container">
+            <table class="table is-fullwidth">
+
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>TTL</th>
+                        <th>Data</th>
+                    {% for server in servers %}
+                        <th>{{ server }}</th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for record in records %}
+                    {% set value = record.rdata.output() %}
+                    {% set name = (zone.name == record.name) ? '@' : record.name %}
+                    <tr>
+                        <td>{{ record.type }}</td>
+                        <td>{{ name }}</td>
+                        <td>{{ record.ttl }}</td>
+                        <td>
+                        {% if value|length > max_length %}
+                            <span
+                                class="has-tooltip-arrow has-tooltipl-multiline"
+                                data-tooltip="{{ value|split('', max_length)|join("\n") }}">{{ value|slice(0,max_length) }}&hellip;</a>
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                        </td>
+                        {% for server in servers %}
+                            <td class="js-queryable"
+                                data-type="{{ record.type }}"
+                                data-name="{{ name }}">&hellip;</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    {% endif %}
+    </div>
+</section>
+
+{% endblock %}

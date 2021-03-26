@@ -1,0 +1,30 @@
+---
+# -*- mode: yaml -*-
+
+# You can run 'php vendor/bin/vendor/bin/generate-defuse-key' to create a unique key
+session:
+  encryption.key: "<generated_defuse_encryption_key>"
+
+# Database settings
+# It is highly recommended that you configure a database connection for
+# production rather than relying on the default sqlite database.
+database:
+  # name: foo_production # Optional - only required for sqlite
+  dsn: mysql:host=localhost;dbname=foo_production
+  username: foo_user
+  password: complicatedsecretpasswordhere
+  options: []
+
+## DEV Settings Below Here ##
+# To enable Slim debugging in development set this to 'true'
+displayErrorDetails: true
+
+# Debug logging to file
+# Enabling this adds a monolog file stream handler for debug messages
+logger:
+  filename: var/log/app.log
+
+# Twig settings
+# For development it is useful to disable twig caching
+twig:
+  cache: false
